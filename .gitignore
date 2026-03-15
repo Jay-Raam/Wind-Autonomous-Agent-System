@@ -1,0 +1,17 @@
+# Monorepo common
+node_modules/
+dist/
+build/
+coverage/
+*.log
+.DS_Store
+
+# Environment files (do not publish)
+**/.env
+**/.env.*
+**/.env.example
+
+# Editor and OS
+.vscode/
+.idea/
+Thumbs.db
