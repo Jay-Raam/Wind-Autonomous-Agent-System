@@ -6,7 +6,6 @@ import { QUEUE_NAMES } from './queue.constants.js';
 export interface TaskJobData {
   taskId: string;
   userId: string;
-  input: string;
 }
 
 let taskQueue: Queue<TaskJobData> | null = null;

@@ -4,6 +4,22 @@ const API_PREFIX = `${API_BASE_URL}/api`;
 
 export const USER_EMAIL_KEY = 'wind.userEmail';
 
+export type AttachmentKind = 'code' | 'csv' | 'text' | 'json' | 'markdown' | 'pdf';
+
+export interface TaskAttachmentInput {
+  fileName: string;
+  mimeType: string;
+  size: number;
+  kind: AttachmentKind;
+  content: string;
+  truncated: boolean;
+}
+
+export interface CreateTaskPayload {
+  input: string;
+  attachment?: TaskAttachmentInput;
+}
+
 interface AuthTokens {
   accessToken: string;
   refreshToken: string;
@@ -41,8 +57,14 @@ interface TaskItem {
   _id?: string;
   input: string;
   status: 'pending' | 'running' | 'completed' | 'failed';
+  attachment?: Omit<TaskAttachmentInput, 'content'>;
   result?: string;
   error?: string;
+  tokenUsage?: {
+    promptTokens: number;
+    completionTokens: number;
+    totalTokens: number;
+  };
   createdAt: string;
   updatedAt: string;
 }
@@ -215,10 +237,12 @@ export async function listTasks(): Promise<TaskItem[]> {
   return request<TaskItem[]>('/tasks');
 }
 
-export async function createTask(input: string): Promise<TaskItem> {
+export async function createTask(input: string | CreateTaskPayload): Promise<TaskItem> {
+  const payload = typeof input === 'string' ? { input } : input;
+
   return request<TaskItem>('/tasks', {
     method: 'POST',
-    body: JSON.stringify({ input }),
+    body: JSON.stringify(payload),
   });
 }
 

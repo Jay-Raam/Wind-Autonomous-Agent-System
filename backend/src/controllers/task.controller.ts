@@ -1,12 +1,13 @@
 import type { NextFunction, Request, Response } from 'express';
 import { TaskService } from '../services/task.service.js';
+import type { CreateTaskInput } from '../types/task.types.js';
 
 const taskService = new TaskService();
 
 export class TaskController {
   async create(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const task = await taskService.createTask(req.user!.id, req.body.input);
+      const task = await taskService.createTask(req.user!.id, req.body as CreateTaskInput);
       res.status(202).json(task);
     } catch (error) {
       next(error);

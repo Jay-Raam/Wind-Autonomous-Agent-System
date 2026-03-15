@@ -58,7 +58,7 @@ export const schema = createSchema<GraphqlContext>({
           throw new AppError('Unauthorized', 401, 'UNAUTHORIZED');
         }
 
-        return taskService.createTask(ctx.userId, args.input);
+        return taskService.createTask(ctx.userId, { input: args.input });
       },
     },
     Task: {

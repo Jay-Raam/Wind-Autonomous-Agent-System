@@ -20,6 +20,7 @@ import {
   listToolsByTask,
   ApiError,
 } from '../../utils/api';
+import type { ChatInputPayload } from './ChatInput';
 import { AgentRole, AgentStep, ChatSession, Message, TaskPlanStep, TaskStatus, ToolExecution } from '../../types';
 import { useAuthStore } from '../../store/authStore';
 
@@ -82,10 +83,12 @@ function mapTaskToSession(task: {
   _id?: string;
   input: string;
   status: TaskStatus;
+  attachment?: Message['attachment'];
   result?: string;
   error?: string;
   createdAt: string;
   updatedAt: string;
+  tokenUsage?: Message['tokenUsage'];
 }): ChatSession {
   const taskId = getEntityId(task);
   const createdAt = toTimestamp(task.createdAt);
@@ -97,6 +100,7 @@ function mapTaskToSession(task: {
       role: 'user' as const,
       content: task.input,
       timestamp: createdAt,
+      attachment: task.attachment,
     },
   ];
 
@@ -106,6 +110,7 @@ function mapTaskToSession(task: {
       role: 'assistant',
       content: task.result,
       timestamp: updatedAt,
+      tokenUsage: task.tokenUsage,
     });
   }
 
@@ -283,6 +288,7 @@ export const ChatContainer: React.FC = () => {
               role: 'assistant',
               content: assistantContent,
               timestamp: Date.now(),
+              tokenUsage: status === 'completed' ? task.tokenUsage : undefined,
             },
           ],
         });
@@ -335,25 +341,34 @@ export const ChatContainer: React.FC = () => {
     };
   }, [clearActivity, currentSession?.id, currentSession?.taskId, setStreaming, syncTaskActivity]);
 
-  const handleSendMessage = async (content: string) => {
+  const handleSendMessage = async ({ input, attachment }: ChatInputPayload) => {
     const sessionId = currentSessionId ?? createNewSession();
     setCurrentSession(sessionId);
 
     const userMessage = {
       id: Date.now().toString(),
       role: 'user' as const,
-      content,
+      content: input,
       timestamp: Date.now(),
+      attachment: attachment
+        ? {
+          fileName: attachment.fileName,
+          mimeType: attachment.mimeType,
+          size: attachment.size,
+          kind: attachment.kind,
+          truncated: attachment.truncated,
+        }
+        : undefined,
     };
     addMessage(sessionId, userMessage);
-    updateSession(sessionId, { title: content.slice(0, 60) });
+    updateSession(sessionId, { title: input.slice(0, 60) || attachment?.fileName || 'New Conversation' });
 
     setStreaming(true);
     clearActivity();
-    setGoal(content);
+    setGoal(input);
 
     try {
-      const task = await createTask(content);
+      const task = await createTask({ input, attachment });
       const taskId = getEntityId(task);
 
       updateSession(sessionId, {
@@ -461,7 +476,7 @@ export const ChatContainer: React.FC = () => {
                   ].map((prompt) => (
                     <button
                       key={prompt}
-                      onClick={() => handleSendMessage(prompt)}
+                      onClick={() => handleSendMessage({ input: prompt })}
                       className="rounded-2xl border border-neutral-200 p-4 text-left text-xs font-medium transition-all hover:bg-neutral-50 dark:border-neutral-800 dark:hover:bg-neutral-900"
                     >
                       {prompt}

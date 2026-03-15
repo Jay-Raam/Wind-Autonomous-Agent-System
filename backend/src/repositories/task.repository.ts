@@ -1,7 +1,7 @@
 import { TaskModel, type TaskDocument } from '../models/task.model.js';
 
 export class TaskRepository {
-  async create(input: Pick<TaskDocument, 'userId' | 'input'>): Promise<TaskDocument> {
+  async create(input: Pick<TaskDocument, 'userId' | 'input' | 'attachment'>): Promise<TaskDocument> {
     return TaskModel.create({
       ...input,
       status: 'pending',
@@ -10,6 +10,10 @@ export class TaskRepository {
 
   async findById(taskId: string): Promise<TaskDocument | null> {
     return TaskModel.findById(taskId).exec();
+  }
+
+  async findByIdWithAttachment(taskId: string): Promise<TaskDocument | null> {
+    return TaskModel.findById(taskId).select('+attachment.content').exec();
   }
 
   async listByUser(userId: string): Promise<TaskDocument[]> {

@@ -1,5 +1,15 @@
 export type AgentRole = 'planner' | 'researcher' | 'analyzer' | 'writer' | 'executor';
 
+export type AttachmentKind = 'code' | 'csv' | 'text' | 'json' | 'markdown' | 'pdf';
+
+export interface FileAttachmentSummary {
+  fileName: string;
+  mimeType: string;
+  size: number;
+  kind: AttachmentKind;
+  truncated: boolean;
+}
+
 export interface AgentStep {
   id: string;
   agentName: string;
@@ -29,6 +39,12 @@ export interface Message {
   role: 'user' | 'assistant';
   content: string;
   timestamp: number;
+  attachment?: FileAttachmentSummary;
+  tokenUsage?: {
+    promptTokens: number;
+    completionTokens: number;
+    totalTokens: number;
+  };
 }
 
 export interface ChatSession {

@@ -18,7 +18,7 @@ export function createApp() {
       credentials: true,
     }),
   );
-  app.use(express.json({ limit: '2mb' }));
+  app.use(express.json({ limit: '6mb' }));
   app.use(httpLogger);
   app.use(sanitizeBodyMiddleware);
 

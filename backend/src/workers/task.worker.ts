@@ -19,7 +19,6 @@ export function startTaskWorker(): Worker<TaskJobData> {
 
       await agentQueue.add('agent.execute', {
         taskId: job.data.taskId,
-        input: job.data.input,
       });
     },
     { connection: bullmqRedis, concurrency: 20 },

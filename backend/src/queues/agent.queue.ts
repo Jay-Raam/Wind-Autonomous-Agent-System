@@ -5,7 +5,6 @@ import { QUEUE_NAMES } from './queue.constants.js';
 
 export interface AgentJobData {
   taskId: string;
-  input: string;
 }
 
 let agentQueue: Queue<AgentJobData> | null = null;

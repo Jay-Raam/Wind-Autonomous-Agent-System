@@ -2,7 +2,7 @@ import type { NextFunction, Request, Response } from 'express';
 
 function sanitizeValue(value: unknown): unknown {
   if (typeof value === 'string') {
-    return value.replace(/[<>]/g, '').trim();
+    return value.trim();
   }
 
   if (Array.isArray(value)) {

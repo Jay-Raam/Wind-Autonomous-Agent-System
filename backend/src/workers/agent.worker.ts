@@ -13,7 +13,7 @@ export function startAgentWorker(): Worker<AgentJobData> {
     QUEUE_NAMES.AGENT_QUEUE,
     async (job) => {
       try {
-        await agentService.executeTask(job.data.taskId, job.data.input);
+        await agentService.executeTask(job.data.taskId);
       } catch (error) {
         await agentService.failTask(job.data.taskId, error instanceof Error ? error.message : 'Unknown error');
         throw error;

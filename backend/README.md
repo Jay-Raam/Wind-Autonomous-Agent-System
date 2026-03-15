@@ -143,15 +143,18 @@ Required/important variables (see config/env.ts):
 7. JWT_REFRESH_SECRET
 8. JWT_ACCESS_TTL
 9. JWT_REFRESH_TTL
-10. LLM_PROVIDER (openrouter | openai | local)
-11. OPENROUTER_API_KEY (optional)
-12. OPENROUTER_BASE_URL
-13. OPENROUTER_MODEL
-14. OPENAI_API_KEY (optional)
-15. OPENAI_BASE_URL
-16. ALLOWED_ORIGINS (comma-separated)
-17. BCRYPT_SALT_ROUNDS
-18. LOG_LEVEL
+10. LLM_PROVIDER (gemini | openrouter | openai | local)
+11. GEMINI_API_KEY (optional)
+12. GEMINI_BASE_URL
+13. GEMINI_MODEL
+14. OPENROUTER_API_KEY (optional)
+15. OPENROUTER_BASE_URL
+16. OPENROUTER_MODEL
+17. OPENAI_API_KEY (optional)
+18. OPENAI_BASE_URL
+19. ALLOWED_ORIGINS (comma-separated)
+20. BCRYPT_SALT_ROUNDS
+21. LOG_LEVEL
 
 ## Scripts
 
@@ -173,5 +176,5 @@ Required/important variables (see config/env.ts):
 
 1. MongoDB indexes are created from model definitions on startup.
 2. LLM service supports provider fallback behavior:
-   openrouter -> openai -> local simulation.
+   preferred provider -> gemini -> openrouter -> openai -> local simulation.
 3. Queue workers run only when Redis connectivity is available.

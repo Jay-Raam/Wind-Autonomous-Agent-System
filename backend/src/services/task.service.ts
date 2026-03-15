@@ -5,6 +5,7 @@ import { TaskLogRepository } from '../repositories/task-log.repository.js';
 import { AppError } from '../utils/errors.js';
 import { deleteCacheByPrefix, getJsonCache, setJsonCache } from '../utils/cache.js';
 import { AgentService } from './agent.service.js';
+import type { CreateTaskInput } from '../types/task.types.js';
 
 export class TaskService {
   constructor(
@@ -13,16 +14,30 @@ export class TaskService {
     private readonly agentService = new AgentService(),
   ) {}
 
-  async createTask(userId: string, input: string) {
+  async createTask(userId: string, input: CreateTaskInput) {
     const task = await this.taskRepository.create({
       userId: new mongoose.Types.ObjectId(userId),
-      input,
+      input: input.input,
+      attachment: input.attachment,
     });
 
     await this.taskLogRepository.create({
       taskId: task._id as mongoose.Types.ObjectId,
       event: 'task_created',
-      payload: { input },
+      payload: {
+        input: input.input,
+        ...(input.attachment
+          ? {
+              attachment: {
+                fileName: input.attachment.fileName,
+                mimeType: input.attachment.mimeType,
+                kind: input.attachment.kind,
+                size: input.attachment.size,
+                truncated: input.attachment.truncated,
+              },
+            }
+          : {}),
+      },
     });
 
     const taskQueue = getTaskQueue();
@@ -31,12 +46,11 @@ export class TaskService {
       await taskQueue.add('task.process', {
         taskId: task.id,
         userId,
-        input,
       });
     } else {
       setImmediate(async () => {
         try {
-          await this.agentService.executeTask(task.id, input);
+          await this.agentService.executeTask(task.id);
         } catch (error) {
           await this.agentService.failTask(task.id, error instanceof Error ? error.message : 'Task execution failed');
         }
