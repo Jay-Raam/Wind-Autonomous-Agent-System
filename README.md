@@ -1,6 +1,6 @@
 # Wind Monorepo
 
-<img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs_webp/967eb1245827815.69b63e63b4541.png" width="900"/>
+<img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs_webp/9ae7de245827815.69b643ceaf6c5.png" width="900"/>
 
 Wind is a full-stack autonomous agent system with a React frontend and a Node.js backend.
 
