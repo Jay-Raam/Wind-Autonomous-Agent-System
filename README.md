@@ -1,11 +1,38 @@
 # Wind Monorepo
 
+<img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs_webp/9ae7de245827815.69b643ceaf6c5.png" width="1200"/>
+
 Wind is a full-stack autonomous agent system with a React frontend and a Node.js backend.
 
 The project is organized into:
 
 1. frontend: user interface and client-side state.
 2. backend: auth, task orchestration, agent/tool execution, APIs, queues, and sockets.
+
+---
+
+# 🎥 Demo Video
+
+Watch the system in action:
+
+[![Watch the Demo](https://mir-s3-cdn-cf.behance.net/project_modules/fs_webp/967eb1245827815.69b63e63b4541.png)](https://www-ccv.adobe.io/v1/player/ccv/2-AKDA24BCI/embed?api_key=behance1&bgcolor=%23191919)
+
+Click the image above to watch the demo video.
+
+## 📸 UI Preview
+
+### Dashboard Interface
+<img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs_webp/967eb1245827815.69b63e63b4541.png" width="900"/>
+
+### Agent Activity Timeline
+<img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs_webp/f59c3b245827815.69b63e63b4efe.png" width="900"/>
+
+### Task Execution View
+<img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs_webp/fa4af2245827815.69b63e63b4a73.png" width="900"/>
+
+
+---
+
 
 ## High-Level Feature Set
 
