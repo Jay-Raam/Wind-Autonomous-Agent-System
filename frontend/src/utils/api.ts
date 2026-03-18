@@ -1,5 +1,5 @@
 const apiEnv = (import.meta as ImportMeta & { env?: Record<string, string> }).env;
-const API_BASE_URL = apiEnv?.VITE_API_BASE_URL ?? 'wind-autonomous-agent-system-backend.vercel.app';
+const API_BASE_URL = apiEnv?.VITE_API_BASE_URL ?? 'http://localhost:8080';
 const API_PREFIX = `${API_BASE_URL}/api`;
 
 export const USER_EMAIL_KEY = 'wind.userEmail';
@@ -237,6 +237,14 @@ export async function listTasks(): Promise<TaskItem[]> {
   return request<TaskItem[]>('/tasks');
 }
 
+/**
+ * Creates a new task with the given input.
+ * If the input is a string, it will be wrapped in an object
+ * with the key 'input'. If the input is an object, it will
+ * be passed through as is.
+ * @param {string | CreateTaskPayload} input - The input to create the task with.
+ * @returns {Promise<TaskItem>} - A promise that resolves with the created task item.
+ */
 export async function createTask(input: string | CreateTaskPayload): Promise<TaskItem> {
   const payload = typeof input === 'string' ? { input } : input;
 
