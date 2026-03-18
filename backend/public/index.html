@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wind Backend</title>
+    <style>
+      :root {
+        color-scheme: light;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(120deg, #f8fafc, #eef2ff);
+        color: #0f172a;
+      }
+
+      main {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+      }
+
+      .card {
+        width: min(760px, 100%);
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid #dbeafe;
+        border-radius: 16px;
+        padding: 28px;
+        box-shadow: 0 12px 40px rgba(15, 23, 42, 0.08);
+      }
+
+      h1 {
+        margin: 0 0 8px;
+        font-size: 28px;
+      }
+
+      p {
+        margin: 0 0 14px;
+        line-height: 1.6;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 20px;
+      }
+
+      a {
+        color: #1d4ed8;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      code {
+        background: #e2e8f0;
+        border-radius: 6px;
+        padding: 2px 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="card">
+        <h1>Wind Backend is Running</h1>
+        <p>
+          This is the backend service root page. API endpoints are available
+          under
+          <code>/api</code>, and GraphQL is available at <code>/graphql</code>.
+        </p>
+        <ul>
+          <li><a href="/health">Health Check</a></li>
+          <li><a href="/api/tasks">Tasks API</a></li>
+          <li><a href="/graphql">GraphQL Playground / Endpoint</a></li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>

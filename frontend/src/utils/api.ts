@@ -1,5 +1,5 @@
 const apiEnv = (import.meta as ImportMeta & { env?: Record<string, string> }).env;
-const API_BASE_URL = apiEnv?.VITE_API_BASE_URL ?? 'http://localhost:8080';
+const API_BASE_URL = apiEnv?.VITE_API_BASE_URL ?? 'wind-autonomous-agent-system-backend.vercel.app';
 const API_PREFIX = `${API_BASE_URL}/api`;
 
 export const USER_EMAIL_KEY = 'wind.userEmail';
