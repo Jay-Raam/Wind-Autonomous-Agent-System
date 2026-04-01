@@ -11,14 +11,6 @@ The project is organized into:
 
 ---
 
-# 🎥 Demo Video
-
-Watch the system in action:
-
-[![Watch the Demo](https://mir-s3-cdn-cf.behance.net/project_modules/fs_webp/967eb1245827815.69b63e63b4541.png)](https://www-ccv.adobe.io/v1/player/ccv/2-AKDA24BCI/embed?api_key=behance1&bgcolor=%23191919)
-
-Click the image above to watch the demo video.
-
 ## 📸 UI Preview
 
 ### Dashboard Interface
