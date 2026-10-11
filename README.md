@@ -1,5 +1,11 @@
 # Wind Monorepo
 
+[![CI](https://github.com/Jay-Raam/Wind-Autonomous-Agent-System/actions/workflows/ci.yml/badge.svg)](https://github.com/Jay-Raam/Wind-Autonomous-Agent-System/actions/workflows/ci.yml)
+[![Node.js](https://img.shields.io/badge/Node.js-20.x-339933?logo=node.js)](https://nodejs.org/)
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)](https://react.dev/)
+[![BullMQ](https://img.shields.io/badge/BullMQ-Redis-DC382D?logo=redis)](https://bullmq.io/)
+[![Socket.IO](https://img.shields.io/badge/Socket.IO-Realtime-010101?logo=socket.io)](https://socket.io/)
+
 <img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs_webp/9ae7de245827815.69b643ceaf6c5.png" width="1200"/>
 
 Wind is a full-stack autonomous agent system with a React frontend and a Node.js backend.
